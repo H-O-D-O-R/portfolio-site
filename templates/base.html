@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% block title %}
+        Егор Волков
+        {% endblock %}
+    </title>
+
+    {% load static %}
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+
+<body>
+
+<header>
+    <h1>Егор Волков</h1>
+    <p>Python Backend Developer</p>
+</header>
+
+
+<main>
+{% block content %}
+{% endblock %}
+</main>
+
+
+</body>
+</html>
