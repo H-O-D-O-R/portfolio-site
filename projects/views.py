@@ -12,7 +12,8 @@ def home(request):
         request,
         "home.html",
         {
-            "projects": projects
+            "projects": projects,
+            "is_home": True,
         }
     )
 
@@ -27,6 +28,7 @@ def project_detail(request, slug):
         request,
         "project_detail.html",
         {
-            "project": project
+            "project": project,
+            "is_home": False,
         }
     )

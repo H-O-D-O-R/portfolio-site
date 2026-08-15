@@ -1,33 +1,246 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="ru">
 
 <head>
+
     <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
     <title>
         {% block title %}
-        Егор Волков
+        Егор Волков | Python Backend Developer & Data Scientist
         {% endblock %}
     </title>
 
-    {% load static %}
+    <link
+        rel="stylesheet"
+        href="{% static 'css/style.css' %}"
+    >
 
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 
 
 <body>
 
-<header>
-    <h1>Егор Волков</h1>
-    <p>Python Backend Developer</p>
-</header>
+<div class="portfolio-layout">
 
 
-<main>
-{% block content %}
-{% endblock %}
-</main>
+    <!-- =====================================================
+         БОКОВАЯ ПАНЕЛЬ
+         ===================================================== -->
 
+    <aside class="sidebar">
+
+
+        <!-- Логотип -->
+
+        <div class="sidebar-logo">
+            EV
+        </div>
+
+
+        <!-- =================================================
+             НАВИГАЦИЯ
+             ================================================= -->
+
+        <nav class="sidebar-nav">
+
+
+            {% if is_home %}
+
+                <!-- ===============================
+                     ГЛАВНАЯ
+                     =============================== -->
+
+                <a
+                    href="#about"
+                    class="nav-item active"
+                >
+                    <span class="nav-icon">
+                        ⌂
+                    </span>
+
+                    <span>
+                        Обо мне
+                    </span>
+                </a>
+
+
+                <a
+                    href="#skills"
+                    class="nav-item"
+                >
+                    <span class="nav-icon">
+                        □
+                    </span>
+
+                    <span>
+                        Навыки
+                    </span>
+                </a>
+
+
+                <a
+                    href="#projects"
+                    class="nav-item"
+                >
+                    <span class="nav-icon">
+                        &lt;/&gt;
+                    </span>
+
+                    <span>
+                        Проекты
+                    </span>
+                </a>
+
+
+                <a
+                    href="#achievements"
+                    class="nav-item"
+                >
+                    <span class="nav-icon">
+                        ♜
+                    </span>
+
+                    <span>
+                        Достижения
+                    </span>
+                </a>
+
+
+                <a
+                    href="#activities"
+                    class="nav-item"
+                >
+                    <span class="nav-icon">
+                        ♙
+                    </span>
+
+                    <span>
+                        Деятельность
+                    </span>
+                </a>
+
+
+                <a
+                    href="#contact"
+                    class="nav-item"
+                >
+                    <span class="nav-icon">
+                        ✉
+                    </span>
+
+                    <span>
+                        Контакты
+                    </span>
+                </a>
+
+
+            {% else %}
+
+                <!-- ===============================
+                     СТРАНИЦА ПРОЕКТА
+                     =============================== -->
+
+                <a
+                    href="{% url 'home' %}"
+                    class="nav-item"
+                >
+                    <span class="nav-icon">
+                        ←
+                    </span>
+
+                    <span>
+                        Главная
+                    </span>
+                </a>
+
+
+                <a
+                    href="#description"
+                    class="nav-item active"
+                >
+                    <span class="nav-icon">
+                        ▣
+                    </span>
+
+                    <span>
+                        Описание
+                    </span>
+                </a>
+
+
+                <!-- Технологии -->
+
+                <a
+                    href="#technologies"
+                    class="nav-item"
+                >
+                    <span class="nav-icon">
+                        &lt;/&gt;
+                    </span>
+
+                    <span>
+                        Технологии
+                    </span>
+                </a>
+
+
+                <!-- ===============================
+                     РАЗДЕЛЫ ИЗ МОДЕЛИ
+                     =============================== -->
+
+                {% for section in project.sections.all %}
+
+                    <a
+                        href="#{{ section.slug }}"
+                        class="nav-item"
+                    >
+
+                        <span class="nav-icon">
+                            {{ section.icon }}
+                        </span>
+
+                        <span>
+                            {{ section.title }}
+                        </span>
+
+                    </a>
+
+                {% endfor %}
+
+            {% endif %}
+
+
+        </nav>
+
+    </aside>
+
+
+
+    <!-- =====================================================
+         ОСНОВНОЙ КОНТЕНТ
+         ===================================================== -->
+
+    <div class="main-content">
+
+        {% block content %}
+        {% endblock %}
+
+    </div>
+
+
+</div>
+
+
+<script src="{% static 'js/main.js' %}"></script>
 
 </body>
+
 </html>

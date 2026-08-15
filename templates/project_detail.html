@@ -1,30 +1,137 @@
 {% extends "base.html" %}
 
 
+{% block title %}
+{{ project.title }} | Егор Волков
+{% endblock %}
+
+
 {% block content %}
 
-<h1>
-{{ project.title }}
-</h1>
+
+<!-- =====================================================
+     ОПИСАНИЕ
+     ===================================================== -->
+
+<section
+    id="description"
+    class="project-section"
+>
+
+    <div class="project-section-header">
+
+        <div class="project-section-icon">
+            ▣
+        </div>
 
 
-<p>
-{{ project.description }}
-</p>
+        <div class="project-section-title">
+
+            <h1>
+                {{ project.title }}
+            </h1>
 
 
-<h3>
-Стек:
-</h3>
+            {% if project.github_url %}
 
-<p>
-{{ project.stack }}
-</p>
+            <a
+                href="{{ project.github_url }}"
+                class="project-github"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                GitHub
+            </a>
+
+            {% endif %}
+
+        </div>
+
+    </div>
 
 
-<a href="{{ project.github_url }}">
-GitHub
-</a>
+    <div class="project-description">
+
+        {{ project.description|linebreaks }}
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     ТЕХНОЛОГИИ
+     ===================================================== -->
+
+<section
+    id="technologies"
+    class="project-section"
+>
+
+    <div class="project-section-header">
+
+        <div class="project-section-icon">
+            &lt;/&gt;
+        </div>
+
+        <h2>
+            Технологии
+        </h2>
+
+    </div>
+
+
+    <div class="project-skills">
+
+        {% for item in project.stack.split %}
+
+            <span>
+                {{ item }}
+            </span>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     ИНДИВИДУАЛЬНЫЕ РАЗДЕЛЫ ПРОЕКТА
+     ===================================================== -->
+
+{% for section in project.sections.all %}
+
+<section
+    id="{{ section.slug }}"
+    class="project-section"
+>
+
+    <div class="project-section-header">
+
+        <div class="project-section-icon">
+            {{ section.icon }}
+        </div>
+
+
+        <h2>
+            {{ section.title }}
+        </h2>
+
+    </div>
+
+
+    <div class="project-section-content">
+
+        {{ section.content|linebreaks }}
+
+    </div>
+
+</section>
+
+{% endfor %}
 
 
 {% endblock %}

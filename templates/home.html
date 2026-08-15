@@ -1,33 +1,379 @@
 {% extends "base.html" %}
-
+{% load static %}
 
 {% block title %}
-Портфолио
+Егор Волков | Python Backend Developer & Data Scientist
 {% endblock %}
 
 
 {% block content %}
 
-<h2>Проекты</h2>
+<!-- HERO -->
+<section class="hero-section container" id="about">
+
+    <div class="hero-content">
+
+        <div class="hero-text">
+
+            <div class="hero-greeting">
+                Привет! Я -
+            </div>
+
+            <h1>
+                Егор Волков
+            </h1>
+
+            <h2>
+                Python Backend Developer
+                <br>
+                <span>&amp; Data Scientist</span>
+            </h2>
+
+            <p class="hero-description">
+                Студент СПбПУ по направлению
+                «Информационные системы и технологии».
+                Разрабатываю backend-сервисы, работаю
+                с данными и алгоритмами машинного обучения.
+                Люблю решать сложные задачи и создавать
+                полезные продукты.
+            </p>
+
+            <a class="github-button"
+            href="https://github.com/H-O-D-O-R"
+            target="_blank"
+            rel="noopener noreferrer">
+
+                <span class="github-icon">GitHub</span>
+                <span>→</span>
+
+            </a>
+
+        </div>
 
 
-{% for project in projects %}
+        <div class="hero-image-wrapper">
 
-<div>
+            <img
+                src="{% static 'images/hero.png' %}"
+                alt="Рабочее место разработчика"
+                class="hero-image"
+            >
 
-<h3>
-<a href="{% url 'project_detail' project.slug %}">
-{{ project.title }}
-</a>
-</h3>
+        </div>
 
-<p>
-{{ project.short_description }}
-</p>
+    </div>
 
-</div>
+</section>
 
-{% endfor %}
 
+
+<!-- ОБРАЗОВАНИЕ -->
+<section class="education">
+    <div class="education-header">
+        <div class="education-icon">
+            🎓
+        </div>
+
+        <h2>Образование</h2>
+    </div>
+
+    <div class="education-content">
+        <h3>
+            Санкт-Петербургский политехнический университет Петра Великого
+        </h3>
+
+        <p class="education-speciality">
+            Информационные системы и технологии
+        </p>
+
+        <p class="education-date">
+            Сентябрь 2024 — Август 2028
+        </p>
+    </div>
+</section>
+
+
+
+<!-- НАВЫКИ -->
+<section class="info-block reveal" id="skills">
+
+    <div class="info-header">
+
+        <div class="info-icon">
+            □
+        </div>
+
+        <h2>Ключевые навыки</h2>
+
+            </div>
+
+
+            <div class="info-content">
+
+                <div class="skills-list">
+
+                    <span class="skill-pill">Python</span>
+                    <span class="skill-pill">Django</span>
+                    <span class="skill-pill">PostgreSQL</span>
+                    <span class="skill-pill">SQL</span>
+                    <span class="skill-pill">SQLite</span>
+                    <span class="skill-pill">SQLAlchemy</span>
+                    <span class="skill-pill">REST API</span>
+                    <span class="skill-pill">Git</span>
+                    <span class="skill-pill">Docker</span>
+
+                    <span class="skill-pill">NumPy</span>
+                    <span class="skill-pill">Pandas</span>
+                    <span class="skill-pill">Matplotlib</span>
+                    <span class="skill-pill">Scikit-learn</span>
+                    <span class="skill-pill">Machine Learning</span>
+
+                    <span class="skill-pill">Asyncio</span>
+                    <span class="skill-pill">Telegram API</span>
+
+                    <span class="skill-pill">C++</span>
+                    <span class="skill-pill">ООП</span>
+                    <span class="skill-pill">Алгоритмы</span>
+                    <span class="skill-pill">Структуры данных</span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+<!-- ПРОЕКТЫ -->
+<section class="container" id="projects">
+
+    <div class="section-heading reveal">
+
+        <h2>
+            Проекты
+        </h2>
+
+    </div>
+
+
+    <div class="projects-grid">
+
+        {% for project in projects %}
+
+        <article class="project-card reveal">
+
+            <h3>
+                {{ project.title }}
+            </h3>
+
+            <div class="project-stack">
+                {{ project.stack }}
+            </div>
+
+            <p>
+                {{ project.short_description }}
+            </p>
+
+            <a href="{% url 'project_detail' project.slug %}"
+            class="project-link">
+
+                Подробнее →
+
+            </a>
+
+        </article>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+
+
+<!-- ДОСТИЖЕНИЯ -->
+<section class="info-block achievements-block reveal" id="achievements">
+
+    <div class="info-header">
+
+        <div class="info-icon achievement-icon">
+            🏆
+        </div>
+
+        <h2>Достижения</h2>
+
+            </div>
+
+
+            <div class="info-content">
+
+                <div class="achievement-list">
+
+                    <div class="achievement-item">
+
+                        <div class="achievement-item-icon">
+                            🥈
+                        </div>
+
+                        <p>
+                            Диплом за II место в конкурсе проектов курса
+                            «Основы проектной деятельности» в номинации
+                            «Научно-технические проекты».
+                        </p>
+
+                    </div>
+
+
+                    <div class="achievement-item">
+
+                        <div class="achievement-item-icon">
+                            📜
+                        </div>
+
+                        <p>
+                            Stepik. Продвинутый курс Python
+                            «Поколение Python».
+                        </p>
+
+                    </div>
+
+
+                    <div class="achievement-item">
+
+                        <div class="achievement-item-icon">
+                            📜
+                        </div>
+
+                        <p>
+                            Сириус. Курс по алгоритмам и структурам данных.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+<!-- ВНЕУЧЕБНАЯ ДЕЯТЕЛЬНОСТЬ -->
+<section class="info-block activity-block reveal" id="activities">
+
+    <div class="info-header">
+
+        <div class="info-icon activity-icon">
+            👥
+        </div>
+
+        <h2>Внеучебная деятельность</h2>
+
+    </div>
+
+
+    <div class="info-content">
+
+        <div class="activity-list">
+
+            <div class="activity-item">
+
+                <h3>
+                    Спикер IT-отдела
+                </h3>
+
+                <p>
+                    IT-отдел Института компьютерных наук
+                    и кибербезопасности СПбПУ Петра Великого.
+                </p>
+
+            </div>
+
+
+            <div class="activity-item">
+
+                <h3>
+                    Научная деятельность
+                </h3>
+
+                <p>
+                    Занят подготовкой научной статьи по теме
+                    «Компьютерное моделирование дорожного движения
+                    беспилотных автомобилей с помощью единой системы
+                    управления» для Открытой Научной Конференции.
+                </p>
+
+            </div>
+
+
+            <div class="activity-item">
+
+                <h3>
+                    Проектная деятельность
+                </h3>
+
+                <p>
+                    Веду проектную деятельность вместе с другими
+                    членами IT-отдела.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- КОНТАКТЫ -->
+<section class="container" id="contact">
+
+    <div class="contact-block reveal">
+
+        <div class="contact-title">
+            <span class="block-icon">✉</span>
+
+            <h2>
+                Контакты
+            </h2>
+        </div>
+
+
+        <div class="contact-item">
+
+            <strong>
+                GitHub
+            </strong>
+
+            <a href="https://github.com/H-O-D-O-R"
+            target="_blank"
+            rel="noopener noreferrer">
+
+                github.com/H-O-D-O-R
+
+            </a>
+
+        </div>
+
+
+        <div class="contact-item">
+
+            <strong>
+                Email
+            </strong>
+
+            <a href="mailto:your.email@example.com">
+
+                egor.volkov.2005.12.03@gmail.com
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
 
 {% endblock %}
