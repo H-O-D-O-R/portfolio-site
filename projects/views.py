@@ -1,7 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 
-# Create your views here.
-from django.shortcuts import render, get_object_or_404
 from .models import Project
 
 
@@ -14,21 +12,28 @@ def home(request):
         {
             "projects": projects,
             "is_home": True,
-        }
+        },
     )
 
 
 def project_detail(request, slug):
     project = get_object_or_404(
         Project,
-        slug=slug
+        slug=slug,
     )
+
+    stack = [
+        item.strip()
+        for item in project.stack.split(",")
+        if item.strip()
+    ]
 
     return render(
         request,
         "project_detail.html",
         {
             "project": project,
+            "stack": stack,
             "is_home": False,
-        }
+        },
     )

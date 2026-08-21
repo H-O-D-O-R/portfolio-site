@@ -38,11 +38,16 @@
     <aside class="sidebar">
 
 
-        <!-- Логотип -->
+        <!-- =================================================
+             ЛОГОТИП
+             ================================================= -->
 
-        <div class="sidebar-logo">
+        <a
+            href="{% url 'home' %}"
+            class="sidebar-logo"
+        >
             EV
-        </div>
+        </a>
 
 
         <!-- =================================================
@@ -62,6 +67,7 @@
                     href="#about"
                     class="nav-item active"
                 >
+
                     <span class="nav-icon">
                         ⌂
                     </span>
@@ -69,6 +75,7 @@
                     <span>
                         Обо мне
                     </span>
+
                 </a>
 
 
@@ -76,6 +83,7 @@
                     href="#skills"
                     class="nav-item"
                 >
+
                     <span class="nav-icon">
                         □
                     </span>
@@ -83,6 +91,7 @@
                     <span>
                         Навыки
                     </span>
+
                 </a>
 
 
@@ -90,6 +99,7 @@
                     href="#projects"
                     class="nav-item"
                 >
+
                     <span class="nav-icon">
                         &lt;/&gt;
                     </span>
@@ -97,6 +107,7 @@
                     <span>
                         Проекты
                     </span>
+
                 </a>
 
 
@@ -104,6 +115,7 @@
                     href="#achievements"
                     class="nav-item"
                 >
+
                     <span class="nav-icon">
                         ♜
                     </span>
@@ -111,6 +123,7 @@
                     <span>
                         Достижения
                     </span>
+
                 </a>
 
 
@@ -118,6 +131,7 @@
                     href="#activities"
                     class="nav-item"
                 >
+
                     <span class="nav-icon">
                         ♙
                     </span>
@@ -125,6 +139,7 @@
                     <span>
                         Деятельность
                     </span>
+
                 </a>
 
 
@@ -132,6 +147,7 @@
                     href="#contact"
                     class="nav-item"
                 >
+
                     <span class="nav-icon">
                         ✉
                     </span>
@@ -139,19 +155,26 @@
                     <span>
                         Контакты
                     </span>
+
                 </a>
 
 
             {% else %}
 
-                <!-- ===============================
+                <!-- =================================================
                      СТРАНИЦА ПРОЕКТА
+                     ================================================= -->
+
+
+                <!-- ===============================
+                     ГЛАВНАЯ
                      =============================== -->
 
                 <a
                     href="{% url 'home' %}"
                     class="nav-item"
                 >
+
                     <span class="nav-icon">
                         ←
                     </span>
@@ -159,13 +182,20 @@
                     <span>
                         Главная
                     </span>
+
                 </a>
 
 
+                <!-- ===============================
+                     ОПИСАНИЕ
+                     =============================== -->
+
                 <a
                     href="#description"
-                    class="nav-item active"
+                    class="nav-item project-nav-item active"
+                    data-section="description"
                 >
+
                     <span class="nav-icon">
                         ▣
                     </span>
@@ -173,15 +203,20 @@
                     <span>
                         Описание
                     </span>
+
                 </a>
 
 
-                <!-- Технологии -->
+                <!-- ===============================
+                     ТЕХНОЛОГИИ
+                     =============================== -->
 
                 <a
                     href="#technologies"
-                    class="nav-item"
+                    class="nav-item project-nav-item"
+                    data-section="technologies"
                 >
+
                     <span class="nav-icon">
                         &lt;/&gt;
                     </span>
@@ -189,22 +224,24 @@
                     <span>
                         Технологии
                     </span>
+
                 </a>
 
 
-                <!-- ===============================
-                     РАЗДЕЛЫ ИЗ МОДЕЛИ
-                     =============================== -->
+                <!-- =================================================
+                     ДИНАМИЧЕСКИЕ РАЗДЕЛЫ ПРОЕКТА
+                     ================================================= -->
 
-                {% for section in project.sections.all %}
+                {% for section in project.sections %}
 
                     <a
-                        href="#{{ section.slug }}"
-                        class="nav-item"
+                        href="#project-section-{{ forloop.counter }}"
+                        class="nav-item project-nav-item"
+                        data-section="project-section-{{ forloop.counter }}"
                     >
 
                         <span class="nav-icon">
-                            {{ section.icon }}
+                            {{ section.icon|default:"▣" }}
                         </span>
 
                         <span>
@@ -215,6 +252,7 @@
 
                 {% endfor %}
 
+
             {% endif %}
 
 
@@ -223,17 +261,16 @@
     </aside>
 
 
-
     <!-- =====================================================
          ОСНОВНОЙ КОНТЕНТ
          ===================================================== -->
 
-    <div class="main-content">
+    <main class="main-content">
 
         {% block content %}
         {% endblock %}
 
-    </div>
+    </main>
 
 
 </div>

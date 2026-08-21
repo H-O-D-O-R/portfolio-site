@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 
-
 {% block title %}
 {{ project.title }} | Егор Волков
 {% endblock %}
@@ -34,14 +33,14 @@
 
             {% if project.github_url %}
 
-            <a
-                href="{{ project.github_url }}"
-                class="project-github"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-                GitHub
-            </a>
+                <a
+                    href="{{ project.github_url }}"
+                    class="project-github"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    GitHub
+                </a>
 
             {% endif %}
 
@@ -84,7 +83,7 @@
 
     <div class="project-skills">
 
-        {% for item in project.stack.split %}
+        {% for item in stack %}
 
             <span>
                 {{ item }}
@@ -99,22 +98,25 @@
 
 
 <!-- =====================================================
-     ИНДИВИДУАЛЬНЫЕ РАЗДЕЛЫ ПРОЕКТА
+     ДИНАМИЧЕСКИЕ РАЗДЕЛЫ ПРОЕКТА
      ===================================================== -->
 
-{% for section in project.sections.all %}
+{% for section in project.sections %}
 
 <section
-    id="{{ section.slug }}"
+    id="project-section-{{ forloop.counter }}"
     class="project-section"
 >
+
+    <!-- =================================================
+         ЗАГОЛОВОК РАЗДЕЛА
+         ================================================= -->
 
     <div class="project-section-header">
 
         <div class="project-section-icon">
-            {{ section.icon }}
+            {{ section.icon|default:"▣" }}
         </div>
-
 
         <h2>
             {{ section.title }}
@@ -123,9 +125,62 @@
     </div>
 
 
+    <!-- =================================================
+         СОДЕРЖИМОЕ РАЗДЕЛА
+         ================================================= -->
+
     <div class="project-section-content">
 
-        {{ section.content|linebreaks }}
+
+        {% for block in section.blocks %}
+
+
+            <!-- =========================================
+                 ТЕКСТОВЫЙ БЛОК
+                 ========================================= -->
+
+            {% if block.type == "text" %}
+
+                <div class="project-text">
+
+                    {{ block.content|linebreaks }}
+
+                </div>
+
+            {% endif %}
+
+
+
+            <!-- =========================================
+                 БЛОК ИЗОБРАЖЕНИЯ
+                 ========================================= -->
+
+            {% if block.type == "image" %}
+
+                <figure class="project-image">
+
+                    <img
+                        src="{{ project.images_url }}{{ block.file }}"
+                        alt="{{ block.caption|default:section.title }}"
+                        loading="lazy"
+                    >
+
+
+                    {% if block.caption %}
+
+                        <figcaption>
+                            {{ block.caption }}
+                        </figcaption>
+
+                    {% endif %}
+
+                </figure>
+
+            {% endif %}
+
+
+        {% endfor %}
+
 
     </div>
 
